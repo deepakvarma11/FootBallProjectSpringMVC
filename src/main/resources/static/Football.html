@@ -1,0 +1,432 @@
+<html>
+    <head>
+        <title>FootBall Matches</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            // function showHideAddMatches()
+            // {
+                
+            //     var x = document.getElementById("AddMatches");
+            //     var y = document.getElementById("DisplayMatch");
+            //     if(x.style.display === "none")
+            //     {
+            //         x.style.display = "block";
+            //         y.style.display = "none";
+            //     }
+            //     else{
+            //         x.style.display = "none";
+            //         y.style.display = "none";
+            //     }
+            // }
+            // function showHideDisplayMatches()
+            // {
+            //     var x = document.getElementById("AddMatches");
+            //     var y = document.getElementById("DisplayMatch");
+            //     if(y.style.display === "none")
+            //     {
+            //         y.style.display = "block";
+            //         x.style.display = "none";
+            //         // dropDown();
+            //     }
+            //     else{
+            //         x.style.display = "none";
+            //         y.style.display = "none";
+            //     }
+            // }
+
+            // function showHideTeams()
+            // {
+            //     var x = document.getElementById("show");
+            //     if (x.style.display === "none") {
+            //         x.style.display = "printvalues()";
+            //     } else {
+            //         x.style.display = "none";
+            //     }
+            // } 
+
+            // <option value="Goa">Goa</option>
+            //          <option value="Bengaluru FC">Bengaluru FC</option>
+            //          <option value="Delhi Dynamos">Delhi Dynamos</option>
+            //          <option value="Kerala Blasters">Kerala Blasters</option>
+            //          <option value="Chennaiyan">Chennaiyan</option>
+
+            // <!-- <br><br> -->
+            //      <!-- Team Name<input type="text" id ="team" placeholder="Team Name"> -->
+            //     // <button onclick="dropDown()">submit</button>
+
+          function printvalues(){
+            //   alert("in method postValues");
+              $.ajax({
+                  url : "http:/localhost:8080/Team",
+                  type: "GET",
+                  success:function(msg){
+                      var i, x ="" , y ="";
+                      $("#table1 tr").remove();
+                        $('<tr>').html("<th>TeamName</th><th>TeamCity</th>").appendTo("#table1");
+                      for(i in msg)
+                      {
+                          $('<tr>').html("<td>" + msg[i].teamcity+ "</td><td>"+ msg[i].teamName+"</td>").appendTo("#table1");
+                        //  x += "<h2>" + msg[i].Team_name +"</h2>";
+                        //  y += "<h2>" + msg[i].TEAM_CITY +"</h2>";
+                      }
+                  }
+              });
+          }
+
+          function dropDown()
+         {  
+            //   var Name = document.getElementById("teamSelectName").value;  
+             $.ajax({
+                 url: "http:/localhost:8080/Team",
+                 type:"GET",
+                //  data:{name:Name},
+                 success:function(msg)
+                 {
+                    $("#TeamNameSelect option").remove();
+                    var i;
+                    for(i in msg){
+                        
+                        $('#TeamNameSelect').append('<option value="'+msg[i].teamName+'">'+msg[i].teamName+'</option>');
+                    }
+                        
+                 }
+             });
+              displayMatches();
+             // AddMatches();
+            
+         }
+        //  
+
+             function displayMatches()
+             {
+                var Name = document.getElementById("TeamNameSelect").value;
+                //alert(Name);
+                $.ajax({
+                    url : "http:/localhost:8080/DisplayMatches",
+                    type : "GET",
+                    data:{name:Name},
+                    success:function(msg)
+                    {
+                        //var x = JSON.parse(msg);
+                        var i ;
+                        
+                        $("#table2 tr").remove();
+                        $('<tr>').html("<th>MatchDate</th><th>Opponent</th><th>FirstTeamScore</th><th>SecondTeamScore</th><th>Goals</th>").appendTo("#table2");
+                        for(i in msg)
+                        { //alert(msg[i].Name);
+                            // if(msg[i].equals)
+                            $('<tr>').html("<td>" + msg[i].matchDate +"</td><td>"+msg[i].teamName +"</td><td>"+ msg[i].firstTeamScore +"</td><td>"+ msg[i].secondTeamScore +"</td><td>"+msg[i].goals+"</td>").appendTo("#table2");
+                        }
+                    }
+                });
+            }  
+            
+            
+            
+            
+        
+           
+         
+         
+            
+        </script>
+        <script>
+            function dropDown1()
+         {  
+            //   var Name = document.getElementById("teamSelectName").value;  
+             $.ajax({
+                 url: "http:/localhost:8080/Team",
+                 type:"GET",
+                //  data:{name:Name},
+                 success:function(msg)
+                 {
+                    $("#TeamNameSelect1 option").remove();
+                    var i;
+                    for(i in msg){
+                        
+                        $('#TeamNameSelect1').append('<option value="'+msg[i].teamName+'">'+msg[i].teamName+'</option>');
+                    }
+                        
+                 }
+             });
+              //displayMatches();
+              //AddMatches();
+            
+         }
+
+         
+        </script>
+        <script>
+        function dropDown2()
+         {  
+            //   var Name = document.getElementById("teamSelectName").value;  
+             $.ajax({
+                 url: "http:/localhost:8080/Team",
+                 type:"GET",
+                //  data:{name:Name},
+                 success:function(msg)
+                 {
+                    $("#TeamNameSelect2 option").remove();
+                    var i;
+                    for(i in msg){
+                        
+                        $('#TeamNameSelect2').append('<option value="'+msg[i].teamName+'">'+msg[i].teamName+'</option>');
+                    }
+                        
+                 }
+             });
+              //displayMatches();
+              //AddMatches();
+            
+         }
+         </script>
+
+
+        <script>
+            function Add_teams()
+            {
+                var TeamName = document.getElementById("TeamName").value;
+                var Teamcity = document.getElementById("TeamCity").value;
+
+                var jsonData = {
+                    "teamName": TeamName,
+                    "teamcity": Teamcity,   
+                };
+                var demo1 =JSON.stringify(jsonData);
+                $.ajax({
+                    url : "http:/localhost:8080/addteams",
+                   type : "POST", 
+                   data:demo1,
+                   beforeSend:function (request)
+                   {
+                       request.setRequestHeader("Content-Type","application/json");
+                       request.setRequestHeader("Accept","application/json");
+                   },
+                   success:function(msg){
+                    //    $("message").text(msg);
+                       alert(msg.responsemessage);
+                   }
+
+                });
+            }
+        </script>
+        
+        <script> function AddMatches() {
+            var fName = document.getElementById("TeamNameSelect1").value;
+            var sName = document.getElementById("TeamNameSelect2").value;
+            var date = document.getElementById("Date").value;
+            var fScore = document.getElementById("Fscore").value;
+            var sScore = document.getElementById("sScore").value;
+
+            var re = new RegExp("(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))");
+                if (re.test(date)) {
+                    //console.log("Valid");
+                } else {
+                    alert("enter the correct date Format");//console.log("Invalid");
+                }
+
+            try { 
+                if(fScore == "")  throw "empty";
+                if(isNaN(fScore)) throw "not a number";
+                fScore = Number(fScore);
+                if(fScore < 0)    throw "Invalid Score";     
+            }
+            catch(err) {
+                alert("Input is " + err);
+            }
+            try { 
+                if(sScore == "")  throw "empty";
+                if(isNaN(sScore)) throw "not a number";
+                sScore = Number(sScore);
+                if(sScore < 0)    throw "Invalid Score";
+                
+            }
+            catch(err) {
+                alert("Input is " + err);
+            }
+
+            var jsonData = {
+                    "matchdate": date,
+                    "firstTeamScore": fScore,
+                    "secondTeamScore": sScore,
+                    "firstTeam": fName,
+                    "secondteam": sName
+                };
+                var demo=JSON.stringify(jsonData);
+                alert(demo);
+               $.ajax({
+                   url : "http://localhost:8080/addMatch",
+                   type : "POST",
+                   //data : 
+                   data:demo,
+                   beforeSend:function (request)
+                   {
+                       request.setRequestHeader("Content-Type","application/json");
+                       request.setRequestHeader("Accept","application/json");
+                   },
+                   success:function(msg){
+                    //    $("message").text(msg);
+                       alert(msg.responsemessage);
+                   }
+               });
+            }
+        </script>
+
+        <script>
+        </script>
+        <style>
+            p {
+                /* border: 2px solid black; */
+                outline: #4CAF50 solid 25px;
+                margin: auto;
+                padding: 10px;
+                text-align: center;
+                font-size: 18pt;
+                font-family: sans-serif;
+            }
+            h1{
+                font-family: sans-serif;
+                font-size: 18pt;
+            }
+            button{
+                width: 15%;
+                background-color: #4CAF50;
+                color: white;
+                padding: 14px 14px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            input[type=text], select{
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            input[type=sumbit] {
+                width: 40%;
+                background-color: #4CAF50;
+                color: white;
+                padding: 14px 20 px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            input[type=submit]:hover {
+                background-color: #4CAF50;
+            }
+
+            div {
+                border-radius: 5px;
+                background-color: #f2f2f2;
+                padding: 80px;
+            }
+
+            #table1 {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            #table1 td, #table1 th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #table1 tr:nth-child(even){background-color: #f2f2f2;}
+
+            #table1 tr:hover {background-color: #ddd;}
+
+            #table1 th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            #table2 {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            #table2 td, #table1 th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #table2 tr:nth-child(even){background-color: #f2f2f2;}
+
+            #table2 tr:hover {background-color: #ddd;}
+
+            #table2 th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #4CAF50;
+                color: white;
+            }
+        </style>
+    </head>
+    <body onload="dropDown();dropDown1();dropDown2()">
+        <p>
+            Football Matches
+        </p>
+        <div id ="show"><button onclick="printvalues()">Teams</button></div>
+        <table id= "table1">
+        </table>
+        
+        <!-- <button onclick="showHideAddMatches()">Add New Matches</button>
+        <button onclick="showHideDisplayMatches()">Display Matches</button> -->
+        <div style="display: flex;">
+            <div  id="AddMatches" style="width:40%; float:left;">
+                <h1>Add Matches</h1>
+                 First Team Name 
+                 <select id ="TeamNameSelect1"></select>
+                 <!-- <select id ="FirstTeam">
+                     <option value="Goa">Goa</option>
+                     <option value="Bengaluru FC">Bengaluru FC</option>
+                     <option value="Delhi Dynamos">Delhi Dynamos</option>
+                     <option value="Kerala Blasters">Kerala Blasters</option>
+                     <option value="Chennaiyan">Chennaiyan</option></select> -->
+                 <!-- <input type="text" id ="fTeam" placeholder="First Team"> -->
+                 Second Team Name
+                 <select id ="TeamNameSelect2"></select>
+                  <!-- <select id ="SecondTeam">
+                        <option value="Goa">Goa</option>
+                        <option value="Bengaluru FC">Bengaluru FC</option>
+                        <option value="Delhi Dynamos">Delhi Dynamos</option>
+                        <option value="Kerala Blasters">Kerala Blasters</option>
+                        <option value="Chennaiyan">Chennaiyan</option></select> -->
+                 <!-- <input type ="text" id = "sTeam" placeholder="Second Team"> -->
+                 Match Date(YYYY-MM-DD HH:MM:SS) <input type ="text" id = "Date" placeHolder="Match Date">
+                 First Team score <input type="text" id ="Fscore" placeholder="FirstTeam Score"><br><br>
+                 Second Team score <input type ="text" id ="sScore" placeholder="SecondTeam Score">
+                 <button onclick="AddMatches()">submit</button>
+                </div>
+             <div id="DisplayMatches" style="width:40%; float:left;">
+                 <h1>Display Matches</h1>
+                 <select id ="TeamNameSelect">
+                 </select>
+                 <!-- <input  type="submit" id="display" onclick="displayMatches()"> -->
+                 <button onclick="displayMatches()">submit</button>
+             </div>
+        </div>
+       <div id="AddTeams">
+            <h1>Add Teams</h1>
+            Team Name <input type="text" id = "TeamName" placeholder="Team Name">
+            Team city <input type="text" id = "TeamCity" placeholder="Team city">
+            <button onclick="Add_teams()">Submit</button>
+       </div>
+        
+        <table id= "table2">
+
+            </table>
+    </body>
+</html>
