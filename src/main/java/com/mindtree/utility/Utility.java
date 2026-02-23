@@ -8,42 +8,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class Utility {
 	
-	@Value("${spring.datasource.url}")
+	@Value("${spring.datasource.url:jdbc:mysql://localhost:3306/football_match_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}")
 	private String dbUrl;
 	
-	@Value("${spring.datasource.username}")
+	@Value("${spring.datasource.username:root}")
 	private String dbUsername;
 	
-	@Value("${spring.datasource.password}")
+	@Value("${spring.datasource.password:Welcome123}")
 	private String dbPassword;
-	
-	private static String staticDbUrl;
-	private static String staticDbUsername;
-	private static String staticDbPassword;
-	
-	@Value("${spring.datasource.url}")
-	public void setStaticDbUrl(String url) {
-		Utility.staticDbUrl = url;
-	}
-	
-	@Value("${spring.datasource.username}")
-	public void setStaticDbUsername(String username) {
-		Utility.staticDbUsername = username;
-	}
-	
-	@Value("${spring.datasource.password}")
-	public void setStaticDbPassword(String password) {
-		Utility.staticDbPassword = password;
-	}
 	
 	public Connection connect() {
 		Connection con = null;
 		try {
-			String url = (staticDbUrl != null) ? staticDbUrl : "jdbc:mysql://localhost:3306/football_match_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
-			String username = (staticDbUsername != null) ? staticDbUsername : "root";
-			String password = (staticDbPassword != null) ? staticDbPassword : "Welcome123";
-			
-			con = DriverManager.getConnection(url, username, password); 
+			con = DriverManager.getConnection(dbUrl, dbUsername, dbPassword); 
 			if (con == null) {
 	            System.out.println("Connection cannot be established");
 	        }
