@@ -5,7 +5,8 @@ package com.mindtree.Football;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-@ComponentScan({"controller","controller1"})
+
+@ComponentScan({"controller","controller1","com.mindtree"})
 @SpringBootApplication
 public class FootballApplication {
 	
