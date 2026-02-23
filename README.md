@@ -2,6 +2,36 @@
 
 A Spring Boot web application for managing football matches and teams. This application allows users to add teams, record matches, and view match statistics.
 
+## 📚 Documentation
+
+- **[QUICKSTART.md](QUICKSTART.md)** - Get started in 3 simple steps
+- **[TESTING_GUIDE.md](TESTING_GUIDE.md)** - Complete testing and verification guide
+- **[HOW_TO_PULL.md](HOW_TO_PULL.md)** - Instructions for pulling changes to your local machine
+- **[SETUP_COMPLETE.md](SETUP_COMPLETE.md)** - Summary of all fixes and changes made
+
+## 🚀 Quick Start
+
+```bash
+# 1. Pull the changes (if needed)
+git checkout copilot/fix-project-setup-issues
+
+# 2. Verify everything is working
+./verify.sh
+
+# 3. Setup database
+./setup-db.sh          # Linux/Mac
+# or
+setup-db.bat           # Windows
+
+# 4. Run the application
+./mvnw spring-boot:run
+
+# 5. Open your browser
+# http://localhost:8080
+```
+
+For detailed instructions, see [QUICKSTART.md](QUICKSTART.md).
+
 ## Features
 
 - Add and view football teams
@@ -175,6 +205,28 @@ The schema.sql file includes sample teams:
 - Hyderabad FC
 
 And some sample matches to get you started.
+
+## Testing and Verification
+
+To verify everything is working correctly:
+
+1. **Run the automated verification script:**
+   ```bash
+   ./verify.sh
+   ```
+   This checks all prerequisites, files, and builds the project.
+
+2. **Follow the comprehensive testing guide:**
+   See [TESTING_GUIDE.md](TESTING_GUIDE.md) for detailed testing instructions including:
+   - Web interface testing
+   - API endpoint testing
+   - Database verification
+   - Common troubleshooting
+
+3. **Manual verification:**
+   - Access http://localhost:8080
+   - Test adding teams and matches
+   - Verify data persistence
 
 ## Troubleshooting
 

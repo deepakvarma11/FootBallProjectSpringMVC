@@ -1,5 +1,13 @@
 # Quick Start Guide 🚀
 
+## First Time Setup?
+
+**If you need to pull changes to your local machine:**
+👉 See [HOW_TO_PULL.md](HOW_TO_PULL.md) for step-by-step git instructions
+
+**Want to verify everything is working?**
+👉 Run `./verify.sh` to automatically check your setup
+
 ## Prerequisites
 - Java 8 or higher
 - Maven 3.x
@@ -79,6 +87,27 @@ Then update URLs in `Football.html` accordingly.
 - ATK Mohun Bagan
 - Hyderabad FC
 
+## Verification & Testing
+
+### Quick Verification
+```bash
+./verify.sh
+```
+This automated script checks:
+- Prerequisites (Java, Maven, MySQL)
+- All required files
+- Configuration correctness
+- Build success
+
+### Comprehensive Testing
+See [TESTING_GUIDE.md](TESTING_GUIDE.md) for:
+- Step-by-step testing instructions
+- Web interface testing
+- API endpoint testing
+- Troubleshooting guide
+
 ---
-📖 For detailed documentation, see **README.md**
-✅ For complete list of changes, see **SETUP_COMPLETE.md**
+📖 For detailed documentation, see **[README.md](README.md)**
+🧪 For comprehensive testing, see **[TESTING_GUIDE.md](TESTING_GUIDE.md)**
+📥 For pulling changes, see **[HOW_TO_PULL.md](HOW_TO_PULL.md)**
+✅ For complete list of changes, see **[SETUP_COMPLETE.md](SETUP_COMPLETE.md)**
